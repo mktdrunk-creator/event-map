@@ -94,19 +94,14 @@ const LIFF_ID = "2011118789-Cr9FZzwn";
 const PAGE_URL = "https://liff.line.me/2011118789-Cr9FZzwn";
   
 async function initLIFF() {
-
-  const shareButton = document.getElementById("shareButton");
-
   try {
-
-    shareButton.disabled = true;
 
     await liff.init({
       liffId: LIFF_ID,
       withLoginOnExternalBrowser: true
     });
 
-    console.log("LIFF initialized");
+    console.log("LIFF READY");
     console.log("isInClient:", liff.isInClient());
     console.log("isLoggedIn:", liff.isLoggedIn());
     console.log(
@@ -114,26 +109,36 @@ async function initLIFF() {
       liff.isApiAvailable("shareTargetPicker")
     );
 
-    shareButton.disabled = false;
+    const shareButton = document.getElementById("shareButton");
 
-  } catch (e) {
+    if (shareButton) {
+      shareButton.disabled = false;
+    }
 
-    console.error("LIFF init error:", e);
+  } catch (error) {
 
-    shareButton.disabled = false;
+    console.error("LIFF INIT ERROR:", error);
+
+    const shareButton = document.getElementById("shareButton");
+
+    if (shareButton) {
+      shareButton.disabled = false;
+    }
   }
 }
+
 initLIFF();
 
 async function shareSchedule() {
 
   const status = document.getElementById("status");
 
+  console.log("===== SHARE BUTTON CLICK =====");
+
   try {
 
-    status.textContent = "กำลังเปิดหน้าสำหรับแชร์...";
+    status.textContent = "กำลังเปิดการแชร์...";
 
-    console.log("===== SHARE START =====");
     console.log("isInClient:", liff.isInClient());
     console.log("isLoggedIn:", liff.isLoggedIn());
     console.log(
@@ -141,11 +146,10 @@ async function shareSchedule() {
       liff.isApiAvailable("shareTargetPicker")
     );
 
-    // ตรวจสอบ Share Target Picker
     if (!liff.isApiAvailable("shareTargetPicker")) {
 
       status.textContent =
-        "อุปกรณ์นี้ไม่รองรับการแชร์ กรุณาเปิดผ่านแอป LINE";
+        "Share Target Picker ไม่พร้อมใช้งาน";
 
       return;
     }
