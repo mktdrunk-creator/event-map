@@ -117,12 +117,6 @@ async function shareSchedule(){
   status.textContent = "กำลังเปิดหน้าสำหรับเลือกเพื่อน...";
 
   try{
-    if (!liff.isLoggedIn()) {
-    liff.login({
-        redirectUri: window.location.href
-    });
-    return;
-}
 
     if(!liff.isApiAvailable("shareTargetPicker")){
       status.textContent = "อุปกรณ์หรือ LINE เวอร์ชันนี้ยังไม่รองรับการแชร์แบบเลือกเพื่อน";
@@ -235,7 +229,10 @@ async function shareSchedule(){
       }
     };
 
-    const result = await liff.shareTargetPicker([message]);
+    const result = await liff.shareTargetPicker(
+  [message],
+  { isMultiple: true }
+);
     if(result){
       status.textContent = "แชร์กำหนดการเรียบร้อยแล้ว";
     }else{
