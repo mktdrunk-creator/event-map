@@ -80,8 +80,7 @@
       <a class="map" target="_blank" href="https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7">เปิด Google Maps</a>
     </div>
 
-<button id="shareButton" class="share"
-  onclick="document.getElementById('status').textContent='กดปุ่มแล้ว'; shareSchedule();">
+<button id="shareButton" class="share" onclick="shareSchedule()">
   📤 แชร์กำหนดการให้เพื่อนใน LINE
 </button>
 
@@ -110,21 +109,10 @@ async function initLIFF() {
       liff.isApiAvailable("shareTargetPicker")
     );
 
-    const shareButton = document.getElementById("shareButton");
-
-    if (shareButton) {
-      shareButton.disabled = false;
-    }
-
   } catch (error) {
 
     console.error("LIFF INIT ERROR:", error);
-
-    const shareButton = document.getElementById("shareButton");
-
-    if (shareButton) {
-      shareButton.disabled = false;
-    }
+    
   }
 }
 
