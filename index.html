@@ -141,18 +141,6 @@ async function shareSchedule() {
       liff.isApiAvailable("shareTargetPicker")
     );
 
-    // ต้อง Login ก่อน
-    if (!liff.isLoggedIn()) {
-
-      status.textContent = "กำลังเข้าสู่ระบบ LINE...";
-
-      liff.login({
-        redirectUri: window.location.href
-      });
-
-      return;
-    }
-
     // ตรวจสอบ Share Target Picker
     if (!liff.isApiAvailable("shareTargetPicker")) {
 
