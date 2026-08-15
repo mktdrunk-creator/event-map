@@ -120,333 +120,142 @@ initLIFF();
 
 async function shareSchedule() {
 
-  const status = document.getElementById("status");
+    const status = document.getElementById("status");
 
-  console.log("===== SHARE BUTTON CLICK =====");
+    try {
 
-  try {
+        status.textContent = "กำลังเตรียมการแชร์...";
 
-    status.textContent = "กำลังเปิดการแชร์...";
+        // รอให้ LIFF พร้อม
+        await liff.ready;
 
-    console.log("isInClient:", liff.isInClient());
-    console.log("isLoggedIn:", liff.isLoggedIn());
-    console.log(
-      "shareTargetPicker:",
-      liff.isApiAvailable("shareTargetPicker")
-    );
+        console.log("===== SHARE START =====");
+        console.log("isInClient:", liff.isInClient());
+        console.log("isLoggedIn:", liff.isLoggedIn());
+        console.log(
+            "shareTargetPicker:",
+            liff.isApiAvailable("shareTargetPicker")
+        );
 
-    if (!liff.isApiAvailable("shareTargetPicker")) {
-
-      status.textContent =
-        "Share Target Picker ไม่พร้อมใช้งาน";
-
-      return;
-    }
-
-    // =========================
-    // FLEX MESSAGE
-    // =========================
-
-    const message = {
-      type: "flex",
-
-      altText:
-        "กำหนดการลอยอังคารพี่หมู วันที่ 22 สิงหาคม 2569",
-
-      contents: {
-        type: "bubble",
-
-        size: "kilo",
-
-        hero: {
-          type: "image",
-          url: "https://mktdrunk-creator.github.io/event-map/portrait.png",
-          size: "full",
-          aspectRatio: "4:5",
-          aspectMode: "cover"
-        },
-
-        body: {
-          type: "box",
-          layout: "vertical",
-          paddingAll: "18px",
-
-          contents: [
-
-            {
-              type: "text",
-              text: "กำหนดการลอยอังคารพี่หมู",
-              weight: "bold",
-              size: "lg",
-              wrap: true
-            },
-
-            {
-              type: "text",
-              text: "วันเสาร์ที่ 22 สิงหาคม 2569",
-              size: "sm",
-              color: "#8a7565",
-              margin: "sm"
-            },
-
-            {
-              type: "separator",
-              margin: "lg"
-            },
-
-            {
-              type: "box",
-              layout: "vertical",
-              margin: "lg",
-              spacing: "md",
-
-              contents: [
-
-                {
-                  type: "text",
-                  text: "08:00 น.",
-                  weight: "bold",
-                  size: "xl",
-                  color: "#9a6a45"
-                },
-
-                {
-                  type: "text",
-                  text: "ทำบุญตอนเช้า วัดภูเขาทอง",
-                  weight: "bold",
-                  size: "md",
-                  wrap: true
-                },
-
-                {
-                  type: "button",
-                  style: "primary",
-                  color: "#4CAF50",
-
-                  action: {
-                    type: "uri",
-                    label: "เปิด Google Maps",
-                    uri: "https://maps.app.goo.gl/xSPUcnf8KmCza1ND6"
-                  }
-                }
-
-              ]
-            },
-
-            {
-              type: "box",
-              layout: "vertical",
-              margin: "lg",
-              spacing: "md",
-
-              contents: [
-
-                {
-                  type: "text",
-                  text: "12:30 น.",
-                  weight: "bold",
-                  size: "xl",
-                  color: "#9a6a45"
-                },
-
-                {
-                  type: "text",
-                  text: "ท่าเรือ บ้านลิ้นช้าง",
-                  weight: "bold",
-                  size: "md",
-                  wrap: true
-                },
-
-                {
-                  type: "button",
-                  style: "primary",
-                  color: "#4CAF50",
-
-                  action: {
-                    type: "uri",
-                    label: "เปิด Google Maps",
-                    uri: "https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7"
-                  }
-                }
-
-              ]
-            }
-
-          ]
-        },
-
-        footer: {
-          type: "box",
-          layout: "vertical",
-          spacing: "sm",
-
-          contents: [
-
-            {
-              type: "button",
-              style: "primary",
-              color: "#06C755",
-
-              action: {
-                type: "uri",
-                label: "เปิดกำหนดการ",
-                uri: PAGE_URL
-              }
-            }
-
-          ]
+        // ต้องเปิดจาก LINE
+        if (!liff.isInClient()) {
+            status.textContent =
+                "กรุณาเปิดลิงก์นี้ภายในแอป LINE แล้วลองใหม่";
+            return;
         }
 
-      }
-    };
-
-    console.log("Calling shareTargetPicker...");
-
-    // สำคัญ: เรียกตรงจาก event ของปุ่ม
-    const result = await liff.shareTargetPicker(
-      [message],
-      {
-        isMultiple: true
-      }
-    );
-
-    console.log("shareTargetPicker result:", result);
-
-    if (result) {
-      status.textContent = "แชร์กำหนดการเรียบร้อยแล้ว";
-    } else {
-      status.textContent = "ยกเลิกการแชร์";
-    }
-
-  } catch (error) {
-
-    console.error("SHARE ERROR:", error);
-
-    status.textContent =
-      "เกิดข้อผิดพลาดในการแชร์ กรุณาลองใหม่";
-
-  }
-}
-  
-    const message = {
-      type: "flex",
-      altText: "กำหนดลอยอังคารพี่หมู วันที่ 22 สิงหาคม 2569",
-      contents: {
-        type: "bubble",
-        size: "kilo",
-        hero: {
-          type: "image",
-          url: "https://mktdrunk-creator.github.io/event-map/portrait.png",
-          size: "full",
-          aspectRatio: "4:5",
-          aspectMode: "cover"
-        },
-        body: {
-          type: "box",
-          layout: "vertical",
-          paddingAll: "18px",
-          contents: [
-            {
-              type: "text",
-              text: "กำหนดลอยอังคารพี่หมู",
-              weight: "bold",
-              size: "xl",
-              wrap: true
-            },
-            {
-              type: "text",
-              text: "วันเสาร์ที่ 22 สิงหาคม 2569",
-              size: "sm",
-              color: "#8a7565",
-              margin: "sm"
-            },
-            {
-              type: "separator",
-              margin: "lg"
-            },
-            {
-              type: "box",
-              layout: "vertical",
-              margin: "lg",
-              spacing: "sm",
-              contents: [
-                {
-                  type: "text",
-                  text: "08:00 น.  ทำบุญตอนเช้า วัดภูเขาทอง",
-                  weight: "bold",
-                  wrap: true
-                },
-                {
-                  type: "button",
-                  style: "link",
-                  height: "sm",
-                  action: {
-                    type: "uri",
-                    label: "เปิด Google Maps",
-                    uri: "https://maps.app.goo.gl/xSPUcnf8KmCza1ND6"
-                  }
-                }
-              ]
-            },
-            {
-              type: "box",
-              layout: "vertical",
-              margin: "md",
-              spacing: "sm",
-              contents: [
-                {
-                  type: "text",
-                  text: "12:30 น.  ท่าเรือ บ้านลิ้นช้าง",
-                  weight: "bold",
-                  wrap: true
-                },
-                {
-                  type: "button",
-                  style: "link",
-                  height: "sm",
-                  action: {
-                    type: "uri",
-                    label: "เปิด Google Maps",
-                    uri: "https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        footer: {
-          type: "box",
-          layout: "vertical",
-          spacing: "sm",
-          contents: [
-            {
-              type: "button",
-              style: "primary",
-              color: "#06C755",
-              action: {
-                type: "uri",
-                label: "เปิดกำหนดการ",
-                uri: PAGE_URL
-              }
-            }
-          ]
+        // ตรวจสอบ Share Target Picker
+        if (!liff.isApiAvailable("shareTargetPicker")) {
+            status.textContent =
+                "เครื่องนี้ไม่รองรับการแชร์แบบนี้ กรุณาเปิดใน LINE";
+            return;
         }
-      }
-    };
 
-    const result = await liff.shareTargetPicker(
-  [message],
-  { isMultiple: true }
-);
-    if(result){
-      status.textContent = "แชร์กำหนดการเรียบร้อยแล้ว";
-    }else{
-      status.textContent = "ปิดหน้าต่างเลือกผู้รับแล้ว";
+        // =========================
+        // FLEX MESSAGE
+        // =========================
+
+        const message = {
+            type: "flex",
+
+            altText:
+                "กำหนดการลอยอังคารพี่หมู วันที่ 22 สิงหาคม 2569",
+
+            contents: {
+                type: "bubble",
+                size: "kilo",
+
+                hero: {
+                    type: "image",
+                    url:
+                        "https://mktdrunk-creator.github.io/event-map/portrait.png",
+                    size: "full",
+                    aspectRatio: "4:5",
+                    aspectMode: "cover"
+                },
+
+                body: {
+                    type: "box",
+                    layout: "vertical",
+                    paddingAll: "18px",
+
+                    contents: [
+                        {
+                            type: "text",
+                            text: "กำหนดการลอยอังคารพี่หมู",
+                            weight: "bold",
+                            size: "lg",
+                            wrap: true
+                        },
+
+                        {
+                            type: "text",
+                            text: "วันเสาร์ที่ 22 สิงหาคม 2569",
+                            size: "sm",
+                            color: "#8a7565",
+                            margin: "sm"
+                        },
+
+                        {
+                            type: "separator",
+                            margin: "lg"
+                        }
+
+                        // ตรงนี้ให้ใช้ contents เดิม
+                        // ของคุณต่อจากบรรทัดเดิม
+                    ]
+                },
+
+                footer: {
+                    type: "box",
+                    layout: "vertical",
+                    spacing: "sm",
+
+                    contents: [
+                        {
+                            type: "button",
+                            style: "primary",
+                            color: "#06C755",
+
+                            action: {
+                                type: "uri",
+                                label: "เปิดกำหนดการ",
+                                uri: PAGE_URL
+                            }
+                        }
+                    ]
+                }
+            }
+        };
+
+        // =========================
+        // เปิดหน้าเลือกคนใน LINE
+        // =========================
+
+        console.log("Calling shareTargetPicker...");
+
+        const result = await liff.shareTargetPicker(
+            [message],
+            {
+                isMultiple: true
+            }
+        );
+
+        console.log("Share result:", result);
+
+        if (result) {
+            status.textContent = "แชร์เรียบร้อยแล้ว";
+        } else {
+            status.textContent = "ยกเลิกการแชร์";
+        }
+
+    } catch (error) {
+
+        console.error("Share Target Picker ERROR:", error);
+
+        status.textContent =
+            "เกิดข้อผิดพลาดในการแชร์ กรุณาลองใหม่";
     }
-  }catch(e){
-    console.error(e);
-    status.textContent = "เกิดข้อผิดพลาดในการแชร์ กรุณาลองใหม่";
-  }
 }
 </script>
 </body>
