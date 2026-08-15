@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>กำหนดลอยอังคารพี่หมู</title>
+<script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+<style>
+*{box-sizing:border-box}body{margin:0;font-family:Arial,"Noto Sans Thai",sans-serif;background:#f3f4f6;color:#222}
+.card{width:min(100%,430px);margin:0 auto;background:#fff;min-height:100vh}
+.hero{width:100%;display:block;aspect-ratio:16/9;object-fit:cover}
+.content{padding:22px}.eyebrow{color:#16a085;font-size:13px;font-weight:700;letter-spacing:.5px;margin-bottom:8px}
+h1{font-size:24px;line-height:1.3;margin:0 0 8px}.date{color:#666;font-size:15px;margin-bottom:20px}
+.mission{border:1px solid #e5e7eb;border-radius:12px;padding:15px;margin-top:12px;background:#fafafa}
+.mission-title{font-size:17px;font-weight:700;margin-bottom:10px}.row{display:flex;gap:10px;margin:7px 0;line-height:1.45}
+.label{width:54px;flex:0 0 54px;color:#888;font-size:14px}.value{font-size:14px;font-weight:600}
+.map{display:block;width:100%;margin-top:12px;padding:10px;border-radius:8px;background:#16a085;color:#fff;text-align:center;text-decoration:none;font-size:14px;font-weight:700}
+.buttons{padding:0 22px 24px}button{width:100%;border:0;border-radius:10px;padding:15px 16px;font-size:16px;font-weight:700;cursor:pointer}
+.share{background:#111827;color:#fff}#status{text-align:center;color:#777;font-size:13px;padding:0 22px 18px;line-height:1.5}
+</style>
+</head>
+<body>
+<main class="card">
+<img class="hero" src="maxresdefault.jpg" alt="สถานที่">
+<section class="content">
+<div class="eyebrow">EVENT MAP</div>
+<h1>กำหนดลอยอังคารพี่หมู</h1>
+<div class="date">📅 22 สิงหาคม 2569</div>
+
+<div class="mission">
+<div class="mission-title">ภารกิจที่ 1 — ทำบุญตอนเช้า</div>
+<div class="row"><div class="label">สถานที่</div><div class="value">วัดภูเขาทอง</div></div>
+<div class="row"><div class="label">เวลา</div><div class="value">08:00 น.</div></div>
+<a class="map" href="https://maps.app.goo.gl/xSPUcnf8KmCza1ND6" target="_blank" rel="noopener">📍 เปิด Google Maps</a>
+</div>
+
+<div class="mission">
+<div class="mission-title">ภารกิจที่ 2 — ลอยอังคาร</div>
+<div class="row"><div class="label">สถานที่</div><div class="value">ท่าเรือ บ้านลิ้นช้าง</div></div>
+<div class="row"><div class="label">เวลา</div><div class="value">12:30 น.</div></div>
+<a class="map" href="https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7" target="_blank" rel="noopener">📍 เปิด Google Maps</a>
+</div>
+</section>
+
+<section class="buttons"><button class="share" id="shareButton">📤 แชร์กำหนดการให้เพื่อนใน LINE</button></section>
+<div id="status"></div>
+</main>
+
+<script>
+const LIFF_ID="ใส่-LIFF-ID-ตรงนี้";
+const map1="https://maps.app.goo.gl/xSPUcnf8KmCza1ND6";
+const map2="https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7";
+const imageUrl=new URL("maxresdefault.jpg",window.location.href).href;
+
+const flexMessage={
+type:"flex",
+altText:"กำหนดการ 22 สิงหาคม 2569 — ทำบุญ 08:00 น. และลอยอังคาร 12:30 น.",
+contents:{
+type:"bubble",size:"kilo",
+hero:{type:"image",url:imageUrl,size:"full",aspectRatio:"16:9",aspectMode:"cover"},
+body:{type:"box",layout:"vertical",spacing:"md",paddingAll:"20px",contents:[
+{type:"text",text:"กำหนดลอยอังคารพี่หมู",size:"xl",weight:"bold",wrap:true},
+{type:"text",text:"22 สิงหาคม 2569",size:"md",color:"#666666",margin:"sm"},
+{type:"separator",margin:"lg"},
+{type:"box",layout:"vertical",margin:"lg",spacing:"sm",contents:[
+{type:"text",text:"ภารกิจที่ 1 — ทำบุญตอนเช้า",weight:"bold",size:"md",wrap:true},
+{type:"box",layout:"baseline",margin:"sm",contents:[
+{type:"text",text:"เวลา",size:"sm",color:"#888888",flex:2},{type:"text",text:"08:00 น.",size:"sm",weight:"bold",flex:4}]},
+{type:"box",layout:"baseline",contents:[
+{type:"text",text:"สถานที่",size:"sm",color:"#888888",flex:2},{type:"text",text:"วัดภูเขาทอง",size:"sm",weight:"bold",flex:4,wrap:true}]},
+{type:"button",style:"primary",color:"#16A085",margin:"sm",action:{type:"uri",label:"เปิด Google Maps",uri:map1}}
+]},
+{type:"separator",margin:"lg"},
+{type:"box",layout:"vertical",margin:"lg",spacing:"sm",contents:[
+{type:"text",text:"ภารกิจที่ 2 — ลอยอังคาร",weight:"bold",size:"md",wrap:true},
+{type:"box",layout:"baseline",margin:"sm",contents:[
+{type:"text",text:"เวลา",size:"sm",color:"#888888",flex:2},{type:"text",text:"12:30 น.",size:"sm",weight:"bold",flex:4}]},
+{type:"box",layout:"baseline",contents:[
+{type:"text",text:"สถานที่",size:"sm",color:"#888888",flex:2},{type:"text",text:"ท่าเรือ บ้านลิ้นช้าง",size:"sm",weight:"bold",flex:4,wrap:true}]},
+{type:"button",style:"primary",color:"#16A085",margin:"sm",action:{type:"uri",label:"เปิด Google Maps",uri:map2}}
+]}
+]}
+}
+};
+
+const status=document.getElementById("status");
+const shareButton=document.getElementById("shareButton");
+
+async function setupLIFF(){
+if(LIFF_ID==="ใส่-LIFF-ID-ตรงนี้"){status.textContent="หน้าเว็บพร้อมแล้ว รอใส่ LIFF ID";return;}
+try{await liff.init({liffId:LIFF_ID});status.textContent="พร้อมแชร์กำหนดการให้เพื่อนใน LINE";}
+catch(err){console.error(err);status.textContent="ไม่สามารถเริ่ม LIFF ได้ กรุณาตรวจสอบ LIFF ID และ Endpoint URL";}
+}
+
+shareButton.addEventListener("click",async()=>{
+try{
+if(LIFF_ID==="ใส่-LIFF-ID-ตรงนี้"){alert("ยังไม่ได้ใส่ LIFF ID ครับ");return;}
+if(!liff.isInClient()){alert("กรุณาเปิดหน้านี้ผ่าน LINE เพื่อใช้ปุ่มแชร์");return;}
+if(!liff.isApiAvailable("shareTargetPicker")){alert("อุปกรณ์หรือ LINE เวอร์ชันนี้ยังไม่รองรับ Share Target Picker");return;}
+const result=await liff.shareTargetPicker([flexMessage]);
+if(result)status.textContent="แชร์กำหนดการให้เพื่อนแล้ว";
+}catch(err){console.error(err);status.textContent="ยกเลิกการแชร์หรือเกิดข้อผิดพลาด";}
+});
+setupLIFF();
+</script>
+</body>
+</html>
