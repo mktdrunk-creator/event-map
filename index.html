@@ -1,255 +1,236 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>กำหนดลอยอังคารพี่หมู</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>กำหนดการลอยอังคารพี่หมู</title>
   <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
   <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      font-family: Arial, "Noto Sans Thai", sans-serif;
-      background: #f3f4f6;
-      color: #222;
+    *{box-sizing:border-box}
+    body{
+      margin:0;background:#f5efe7;color:#3e332b;
+      font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans Thai",sans-serif;
     }
-    .card {
-      width: min(100%, 430px);
-      margin: 0 auto;
-      background: #fff;
-      min-height: 100vh;
-      box-shadow: 0 2px 14px rgba(0,0,0,.08);
+    .wrap{max-width:480px;margin:auto;padding-bottom:28px}
+    .hero{
+      position:relative;height:390px;overflow:hidden;background:#ddd;
     }
-    .hero {
-      width: 100%;
-      display: block;
-      aspect-ratio: 16 / 9;
-      object-fit: cover;
+    .hero img{width:100%;height:100%;object-fit:cover;display:block}
+    .hero:after{
+      content:"";position:absolute;inset:0;
+      background:linear-gradient(180deg,rgba(0,0,0,.02) 45%,rgba(45,29,18,.68) 100%);
     }
-    .content { padding: 22px; }
-    .eyebrow {
-      color: #16a085;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      margin-bottom: 8px;
+    .heroText{
+      position:absolute;z-index:2;left:24px;right:24px;bottom:24px;color:#fff;
     }
-    h1 {
-      font-size: 24px;
-      line-height: 1.3;
-      margin: 0 0 18px;
+    .heroText .small{font-size:14px;opacity:.92;margin-bottom:6px}
+    .heroText h1{font-size:27px;line-height:1.25;margin:0;font-weight:700}
+    .card{
+      background:#fff;margin:-18px 16px 0;border-radius:20px;
+      position:relative;z-index:3;padding:20px;
+      box-shadow:0 8px 30px rgba(75,48,25,.12);
     }
-    .row {
-      display: flex;
-      gap: 12px;
-      margin: 12px 0;
-      line-height: 1.5;
+    .date{
+      text-align:center;background:#f8f0e7;border-radius:14px;padding:12px;
+      font-weight:700;color:#76553e;margin-bottom:16px;
     }
-    .label {
-      width: 62px;
-      flex: 0 0 62px;
-      color: #888;
-      font-size: 14px;
+    .event{
+      border:1px solid #eadfd3;border-radius:16px;padding:16px;margin:12px 0;
+      background:#fffdfb;
     }
-    .value {
-      font-size: 15px;
-      font-weight: 600;
+    .time{font-size:25px;font-weight:800;color:#9a6b45}
+    .title{font-size:18px;font-weight:700;margin:4px 0}
+    .place{font-size:14px;color:#756960;line-height:1.5}
+    .map{
+      display:block;text-align:center;text-decoration:none;margin-top:12px;
+      padding:11px;border-radius:11px;background:#4caf50;color:white;font-weight:700;
     }
-    .buttons { padding: 0 22px 24px; }
-    button, a {
-      width: 100%;
-      display: block;
-      border: 0;
-      border-radius: 10px;
-      padding: 14px 16px;
-      text-align: center;
-      font-size: 16px;
-      font-weight: 700;
-      text-decoration: none;
-      cursor: pointer;
-      margin-top: 10px;
+    .share{
+      width:100%;border:0;border-radius:13px;padding:15px;margin-top:8px;
+      background:#06c755;color:white;font-size:17px;font-weight:800;cursor:pointer;
     }
-    .map {
-      background: #16a085;
-      color: white;
-    }
-    .share {
-      background: #111827;
-      color: white;
-    }
-    #status {
-      text-align: center;
-      color: #777;
-      font-size: 13px;
-      padding: 0 22px 18px;
-    }
+    .note{text-align:center;color:#8c7d72;font-size:12px;margin-top:12px;line-height:1.5}
+    .status{text-align:center;font-size:13px;margin-top:8px;color:#7d6d61;min-height:20px}
   </style>
 </head>
 <body>
-  <main class="card">
-    <img class="hero" src="maxresdefault.jpg" alt="สถานที่จัดงาน">
-
-    <section class="content">
-      <div class="eyebrow">EVENT MAP</div>
+<div class="wrap">
+  <div class="hero">
+    <img src="portrait.jpg" alt="ภาพระลึก">
+    <div class="heroText">
+      <div class="small">กำหนดการวันที่ 22 สิงหาคม 2569</div>
       <h1>กำหนดลอยอังคารพี่หมู</h1>
+    </div>
+  </div>
 
-      <div class="row">
-        <div class="label">วันที่</div>
-        <div class="value">22 สิงหาคม 2569</div>
-      </div>
+  <div class="card">
+    <div class="date">วันเสาร์ที่ 22 สิงหาคม 2569</div>
 
-      <div class="row">
-        <div class="label">เวลา</div>
-        <div class="value">12:30 น.</div>
-      </div>
+    <div class="event">
+      <div class="time">08:00 น.</div>
+      <div class="title">ทำบุญตอนเช้า วัดภูเขาทอง</div>
+      <div class="place">สถานที่ 1 · นัดหมายภารกิจช่วงเช้า</div>
+      <a class="map" target="_blank" href="https://maps.app.goo.gl/xSPUcnf8KmCza1ND6">เปิด Google Maps</a>
+    </div>
 
-      <div class="row">
-        <div class="label">สถานที่</div>
-        <div class="value">อาคารเฉลิมพระเกียรติ ร.3 บ้านลิ้นช้าง</div>
-      </div>
-    </section>
+    <div class="event">
+      <div class="time">12:30 น.</div>
+      <div class="title">ท่าเรือ บ้านลิ้นช้าง</div>
+      <div class="place">สถานที่ 2 · สำหรับภารกิจลอยอังคาร</div>
+      <a class="map" target="_blank" href="https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7">เปิด Google Maps</a>
+    </div>
 
-    <section class="buttons">
-      <a class="map" href="https://maps.app.goo.gl/FSQxTPRwJHqhCj6H7" target="_blank" rel="noopener">
-        📍 เปิด Google Maps
-      </a>
-      <button class="share" id="shareButton">
-        📤 แชร์ให้เพื่อนใน LINE
-      </button>
-    </section>
-
-    <div id="status"></div>
-  </main>
+    <button class="share" onclick="shareSchedule()">📤 แชร์กำหนดการให้เพื่อนใน LINE</button>
+    <div id="status" class="status"></div>
+    <div class="note">กดปุ่มแชร์ แล้วเลือกเพื่อนหรือกลุ่มใน LINE ได้เลย</div>
+  </div>
+</div>
 
 <script>
-  // หลังสร้าง LIFF App แล้ว ให้นำ LIFF ID มาแทนค่าด้านล่าง
-  const LIFF_ID = "ใส่-LIFF-ID-ตรงนี้";
+const LIFF_ID = "2011118789-Cr9FZzwn";
+const PAGE_URL = "https://liff.line.me/2011118789-Cr9FZzwn";
 
-  const mapUrl = "https://maps.app.goo.gl/FSQxTPRwJHqhCj6H7";
-  const imageUrl = new URL("maxresdefault.jpg", window.location.href).href;
+async function initLIFF(){
+  try{
+    await liff.init({liffId: LIFF_ID});
+  }catch(e){
+    console.log("LIFF init:", e);
+  }
+}
+initLIFF();
 
-  const flexMessage = {
-    type: "flex",
-    altText: "กำหนดลอยอังคารพี่หมู | 22 สิงหาคม 2569 เวลา 12:30 น.",
-    contents: {
-      type: "bubble",
-      size: "kilo",
-      hero: {
-        type: "image",
-        url: imageUrl,
-        size: "full",
-        aspectRatio: "16:9",
-        aspectMode: "cover"
-      },
-      body: {
-        type: "box",
-        layout: "vertical",
-        spacing: "md",
-        paddingAll: "20px",
-        contents: [
-          {
-            type: "text",
-            text: "กำหนดลอยอังคารพี่หมู",
-            size: "xl",
-            weight: "bold",
-            wrap: true
-          },
-          {
-            type: "separator",
-            margin: "lg"
-          },
-          {
-            type: "box",
-            layout: "vertical",
-            margin: "lg",
-            spacing: "md",
-            contents: [
-              {
-                type: "box",
-                layout: "baseline",
-                contents: [
-                  { type: "text", text: "วันที่", size: "sm", color: "#888888", flex: 2 },
-                  { type: "text", text: "22 สิงหาคม 2569", size: "sm", weight: "bold", flex: 4, wrap: true }
-                ]
-              },
-              {
-                type: "box",
-                layout: "baseline",
-                contents: [
-                  { type: "text", text: "เวลา", size: "sm", color: "#888888", flex: 2 },
-                  { type: "text", text: "12:30 น.", size: "sm", weight: "bold", flex: 4 }
-                ]
-              },
-              {
-                type: "box",
-                layout: "baseline",
-                contents: [
-                  { type: "text", text: "สถานที่", size: "sm", color: "#888888", flex: 2 },
-                  { type: "text", text: "อาคารเฉลิมพระเกียรติ ร.3 บ้านลิ้นช้าง", size: "sm", weight: "bold", flex: 4, wrap: true }
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      footer: {
-        type: "box",
-        layout: "vertical",
-        paddingAll: "15px",
-        contents: [
-          {
-            type: "button",
-            style: "primary",
-            color: "#16A085",
-            action: {
-              type: "uri",
-              label: "เปิด Google Maps",
-              uri: mapUrl
-            }
-          }
-        ]
-      }
-    }
-  };
-
+async function shareSchedule(){
   const status = document.getElementById("status");
-  const shareButton = document.getElementById("shareButton");
+  status.textContent = "กำลังเปิดหน้าสำหรับเลือกเพื่อน...";
 
-  async function setupLIFF() {
-    if (LIFF_ID === "ใส่-LIFF-ID-ตรงนี้") {
-      status.textContent = "หน้าเว็บพร้อมแล้ว รอใส่ LIFF ID หลังจากสร้าง LIFF App";
+  try{
+    if(!window.liff || !liff.isLoggedIn()){
+      status.textContent = "กรุณาเปิดหน้านี้จาก LINE เพื่อใช้ปุ่มแชร์";
       return;
     }
-    try {
-      await liff.init({ liffId: LIFF_ID });
-      status.textContent = "พร้อมแชร์ให้เพื่อนใน LINE";
-    } catch (err) {
-      console.error(err);
-      status.textContent = "ไม่สามารถเริ่ม LIFF ได้ กรุณาตรวจสอบ LIFF ID และ Endpoint URL";
+
+    if(!liff.isApiAvailable("shareTargetPicker")){
+      status.textContent = "อุปกรณ์หรือ LINE เวอร์ชันนี้ยังไม่รองรับการแชร์แบบเลือกเพื่อน";
+      return;
     }
+
+    const message = {
+      type: "flex",
+      altText: "กำหนดลอยอังคารพี่หมู วันที่ 22 สิงหาคม 2569",
+      contents: {
+        type: "bubble",
+        size: "kilo",
+        hero: {
+          type: "image",
+          url: "https://mktdrunk-creator.github.io/event-map/portrait.jpg",
+          size: "full",
+          aspectRatio: "4:5",
+          aspectMode: "cover"
+        },
+        body: {
+          type: "box",
+          layout: "vertical",
+          paddingAll: "18px",
+          contents: [
+            {
+              type: "text",
+              text: "กำหนดลอยอังคารพี่หมู",
+              weight: "bold",
+              size: "xl",
+              wrap: true
+            },
+            {
+              type: "text",
+              text: "วันเสาร์ที่ 22 สิงหาคม 2569",
+              size: "sm",
+              color: "#8a7565",
+              margin: "sm"
+            },
+            {
+              type: "separator",
+              margin: "lg"
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              margin: "lg",
+              spacing: "sm",
+              contents: [
+                {
+                  type: "text",
+                  text: "08:00 น.  ทำบุญตอนเช้า วัดภูเขาทอง",
+                  weight: "bold",
+                  wrap: true
+                },
+                {
+                  type: "button",
+                  style: "link",
+                  height: "sm",
+                  action: {
+                    type: "uri",
+                    label: "เปิด Google Maps",
+                    uri: "https://maps.app.goo.gl/xSPUcnf8KmCza1ND6"
+                  }
+                }
+              ]
+            },
+            {
+              type: "box",
+              layout: "vertical",
+              margin: "md",
+              spacing: "sm",
+              contents: [
+                {
+                  type: "text",
+                  text: "12:30 น.  ท่าเรือ บ้านลิ้นช้าง",
+                  weight: "bold",
+                  wrap: true
+                },
+                {
+                  type: "button",
+                  style: "link",
+                  height: "sm",
+                  action: {
+                    type: "uri",
+                    label: "เปิด Google Maps",
+                    uri: "https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        footer: {
+          type: "box",
+          layout: "vertical",
+          spacing: "sm",
+          contents: [
+            {
+              type: "button",
+              style: "primary",
+              color: "#06C755",
+              action: {
+                type: "uri",
+                label: "เปิดกำหนดการ",
+                uri: PAGE_URL
+              }
+            }
+          ]
+        }
+      }
+    };
+
+    const result = await liff.shareTargetPicker([message]);
+    if(result){
+      status.textContent = "แชร์กำหนดการเรียบร้อยแล้ว";
+    }else{
+      status.textContent = "ปิดหน้าต่างเลือกผู้รับแล้ว";
+    }
+  }catch(e){
+    console.error(e);
+    status.textContent = "เกิดข้อผิดพลาดในการแชร์ กรุณาลองใหม่";
   }
-
-  shareButton.addEventListener("click", async () => {
-    try {
-      if (!liff.isInClient()) {
-        alert("กรุณาเปิดหน้านี้ผ่าน LINE เพื่อใช้ปุ่มแชร์");
-        return;
-      }
-      if (!liff.isApiAvailable("shareTargetPicker")) {
-        alert("อุปกรณ์หรือ LINE เวอร์ชันนี้ยังไม่รองรับ Share Target Picker");
-        return;
-      }
-      const result = await liff.shareTargetPicker([flexMessage]);
-      if (result) {
-        status.textContent = "แชร์การ์ดให้เพื่อนแล้ว";
-      }
-    } catch (err) {
-      console.error(err);
-      status.textContent = "ยกเลิกการแชร์หรือเกิดข้อผิดพลาด";
-    }
-  });
-
-  setupLIFF();
+}
 </script>
 </body>
 </html>
