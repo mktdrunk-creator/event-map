@@ -111,15 +111,14 @@ async function initLIFF() {
 initLIFF();
 
 async function shareSchedule() {
+
   const status = document.getElementById("status");
 
   try {
-    status.textContent = "กำลังเตรียมแชร์...";
 
-    // รอให้ LIFF initialize เสร็จ
-    await liff.ready;
+    status.textContent = "กำลังเปิดหน้าสำหรับแชร์...";
 
-    console.log("LIFF ready");
+    console.log("===== SHARE START =====");
     console.log("isInClient:", liff.isInClient());
     console.log("isLoggedIn:", liff.isLoggedIn());
     console.log(
@@ -127,8 +126,9 @@ async function shareSchedule() {
       liff.isApiAvailable("shareTargetPicker")
     );
 
-    // ถ้ายังไม่ได้ Login ให้ Login ก่อน
+    // ต้อง Login ก่อน
     if (!liff.isLoggedIn()) {
+
       status.textContent = "กำลังเข้าสู่ระบบ LINE...";
 
       liff.login({
@@ -138,10 +138,12 @@ async function shareSchedule() {
       return;
     }
 
-    // ตรวจสอบ Share Target Picker หลัง Login
+    // ตรวจสอบ Share Target Picker
     if (!liff.isApiAvailable("shareTargetPicker")) {
+
       status.textContent =
-        "ไม่สามารถเปิดหน้าสำหรับแชร์ได้ กรุณาเปิดผ่าน LINE อีกครั้ง";
+        "อุปกรณ์นี้ไม่รองรับการแชร์ กรุณาเปิดผ่านแอป LINE";
+
       return;
     }
 
@@ -151,7 +153,9 @@ async function shareSchedule() {
 
     const message = {
       type: "flex",
-      altText: "กำหนดการลอยอังคารพี่หมู วันที่ 22 สิงหาคม 2569",
+
+      altText:
+        "กำหนดการลอยอังคารพี่หมู วันที่ 22 สิงหาคม 2569",
 
       contents: {
         type: "bubble",
@@ -172,6 +176,7 @@ async function shareSchedule() {
           paddingAll: "18px",
 
           contents: [
+
             {
               type: "text",
               text: "กำหนดการลอยอังคารพี่หมู",
@@ -200,6 +205,7 @@ async function shareSchedule() {
               spacing: "md",
 
               contents: [
+
                 {
                   type: "text",
                   text: "08:00 น.",
@@ -220,12 +226,14 @@ async function shareSchedule() {
                   type: "button",
                   style: "primary",
                   color: "#4CAF50",
+
                   action: {
                     type: "uri",
                     label: "เปิด Google Maps",
                     uri: "https://maps.app.goo.gl/xSPUcnf8KmCza1ND6"
                   }
                 }
+
               ]
             },
 
@@ -236,6 +244,7 @@ async function shareSchedule() {
               spacing: "md",
 
               contents: [
+
                 {
                   type: "text",
                   text: "12:30 น.",
@@ -256,14 +265,17 @@ async function shareSchedule() {
                   type: "button",
                   style: "primary",
                   color: "#4CAF50",
+
                   action: {
                     type: "uri",
                     label: "เปิด Google Maps",
                     uri: "https://maps.app.goo.gl/PiLwdYGvJ9mtPUdM7"
                   }
                 }
+
               ]
             }
+
           ]
         },
 
@@ -273,6 +285,7 @@ async function shareSchedule() {
           spacing: "sm",
 
           contents: [
+
             {
               type: "button",
               style: "primary",
@@ -284,17 +297,16 @@ async function shareSchedule() {
                 uri: PAGE_URL
               }
             }
+
           ]
         }
+
       }
     };
 
-    // =========================
-    // SHARE
-    // =========================
+    console.log("Calling shareTargetPicker...");
 
-    console.log("กำลังเปิด Share Target Picker...");
-
+    // สำคัญ: เรียกตรงจาก event ของปุ่ม
     const result = await liff.shareTargetPicker(
       [message],
       {
@@ -302,22 +314,24 @@ async function shareSchedule() {
       }
     );
 
-    console.log("Share result:", result);
+    console.log("shareTargetPicker result:", result);
 
     if (result) {
       status.textContent = "แชร์กำหนดการเรียบร้อยแล้ว";
     } else {
-      status.textContent = "ปิดหน้าต่างแชร์แล้ว";
+      status.textContent = "ยกเลิกการแชร์";
     }
 
   } catch (error) {
 
-    console.error("Share Target Picker Error:", error);
+    console.error("SHARE ERROR:", error);
 
     status.textContent =
-      "เกิดข้อผิดพลาดในการแชร์ กรุณาลองใหม่อีกครั้ง";
+      "เกิดข้อผิดพลาดในการแชร์ กรุณาลองใหม่";
+
   }
 }
+  
     const message = {
       type: "flex",
       altText: "กำหนดลอยอังคารพี่หมู วันที่ 22 สิงหาคม 2569",
